@@ -2,7 +2,7 @@ const { AuthenticationError } = require('apollo-server-express');
 const { User, Product, Category, Order } = require('../models');
 const { signToken } = require('../utils/auth');
 
-const stripe = require('stripe')('sk_test_4eC39HqLyjWDarjtT1zdp7dc');
+const stripe = require('stripe')('sk_test_51KMsL6CWtEcKAfjCphTPRlvPr2likQF4VOwD7FlpKTg5AHrVOivNIAomHadvLUqDY0OSpTtQtd5OLZsClKm41spq00QU2cTA6m');
 
 const resolvers = {
   Query: {
@@ -73,7 +73,7 @@ const resolvers = {
           creating the product ID.
           This is to pass the images to the stripe products array
           */
-          images: [`${url}/images/${products[i].image}`]
+          images: [`${products[i].image}`]
         });
 
         // generate price id using the product id
