@@ -1,0 +1,31 @@
+{
+  "name": "redux-store",
+  "version": "1.0.0",
+  "description": "22. State Challenge: Redux Store",
+  "main": "index.js",
+  "scripts": {
+    "start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
+    "start:prod": "cd server && npm start",
+    "start:dev": "concurrently \"cd server && npm run watch\" \"cd client && npm start\"",
+    "install": "cd server && npm i && cd ../client && npm i",
+    "seed": "cd server && npm run seed",
+    "heroku-postbuild": "cd client && npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rhodaevangelene/redux-store.git"
+  },
+  "keywords": [
+    "redux"
+  ],
+  "author": "Rhoda Evangelene",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rhodaevangelene/redux-store/issues"
+  },
+  "homepage": "https://github.com/rhodaevangelene/redux-store#readme",
+  "dependencies": {
+    "@reduxjs/toolkit": "^1.7.1",
+    "redux": "^4.1.2"
+  }
+}
