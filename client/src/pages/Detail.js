@@ -2,8 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { useQuery } from '@apollo/react-hooks';
 import Cart from "../components/Cart";
-// remove as we will use redux store
-//import { useStoreContext } from "../utils/GlobalState";
+
 import { useDispatch, useSelector } from 'react-redux';
 import {
   REMOVE_FROM_CART,
@@ -16,15 +15,13 @@ import { idbPromise } from "../utils/helpers";
 import spinner from '../assets/spinner.gif'
 
 function Detail() {
-  // commented out in favor of redux logic for useStoreContext
-  //const [state, dispatch] = useStoreContext();
-  // redux useStoreContent logic
+
   const state = useSelector((state) => {
     return state
   });
   const dispatch = useDispatch();
 
-  
+
   const { id } = useParams();
 
   const [currentProduct, setCurrentProduct] = useState({});
@@ -34,11 +31,9 @@ function Detail() {
   const { products, cart } = state;
 
   useEffect(() => {
-    // already in global store
     if (products.length) {
       setCurrentProduct(products.find(product => product._id === id));
-    } 
-    // retrieved from server
+    }
     else if (data) {
       dispatch({
         type: UPDATE_PRODUCTS,
@@ -49,7 +44,6 @@ function Detail() {
         idbPromise('products', 'put', product);
       });
     }
-    // get cache from idb
     else if (!loading) {
       idbPromise('products', 'get').then((indexedProducts) => {
         dispatch({
@@ -91,7 +85,6 @@ function Detail() {
     idbPromise('cart', 'delete', { ...currentProduct });
   };
 
-  // check if there is anything in cart then display also.
   return (
     <>
       {currentProduct && cart ? (
@@ -113,8 +106,8 @@ function Detail() {
             <button onClick={addToCart}>
               Add to Cart
             </button>
-            <button 
-              disabled={!cart.find(p => p._id === currentProduct._id)} 
+            <button
+              disabled={!cart.find(p => p._id === currentProduct._id)}
               onClick={removeFromCart}
             >
               Remove from Cart
